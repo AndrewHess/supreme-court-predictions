@@ -61,13 +61,16 @@ model.add(Dense(1))
 model.add(Activation('sigmoid'))
 '''
 
+'''
 model.add(Dense(16, input_shape=(10, 1)))
 model.add(Activation('relu'))
+
 model.add(Dense(32))
 model.add(Dense(32))
 model.add(Activation('relu'))
 model.add(Dense(64))
 model.add(Dense(128))
+model.add(Dense(256))
 model.add(Dense(128))
 model.add(Activation('relu'))
 model.add(Dense(128))
@@ -75,21 +78,33 @@ model.add(Dense(64))
 model.add(Dense(32))
 model.add(Dense(16))
 model.add(Dense(10))
+
+model.add(Flatten())
+model.add(Dense(1))
+model.add(Activation('sigmoid'))
+'''
+
+model.add(Dense(32, input_shape=(149, 1)))
+model.add(Dense(16))
+model.add(Dense(16))
+model.add(Dense(8))
+
 model.add(Flatten())
 model.add(Dense(1))
 model.add(Activation('sigmoid'))
 
+
 model.summary()
 
 # Compile and test the model.
-model.compile(loss='binary_crossentropy', optimizer='rmsprop', metrics=['accuracy'])
+model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 
 results = model.fit(
     train_x, train_y,
-    epochs= 10,
-    batch_size = 500,
+    epochs= 100,
+    batch_size = 100,
     validation_data = (test_x, test_y)
-    #validation_data = (train_x, train_y)
+#    validation_data = (train_x, train_y)
 )
 
 print("Test-Accuracy:", np.mean(results.history["val_acc"]))
