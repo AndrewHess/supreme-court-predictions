@@ -6,8 +6,8 @@ counters = [0] * 4  # File number counters for train and test, 1 and 2
 random.seed(3)
 
 # Open the files
-data = open('../data.nosync/cases.csv', 'r')
-result = open('../data.nosync/outcomes.csv', 'r')
+data = open('../raw_data/cases.csv', 'r')
+result = open('../raw_data/outcomes.csv', 'r')
 
 train0 = open('../data.nosync/train/0/data.csv', 'w+')
 train1 = open('../data.nosync/train/1/data.csv', 'w+')
