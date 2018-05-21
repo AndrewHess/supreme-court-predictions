@@ -6,8 +6,8 @@ counters = [0] * 4  # File number counters for train and test, 1 and 2
 random.seed(3)
 
 # Open the files
-data = open('../data.nosync/features.csv', 'r')
-result = open('../data.nosync/labels.csv', 'r')
+data = open('../data.nosync/cases.csv', 'r')
+result = open('../data.nosync/outcomes.csv', 'r')
 
 train0 = open('../data.nosync/train/0/data.csv', 'w+')
 train1 = open('../data.nosync/train/1/data.csv', 'w+')
@@ -16,6 +16,7 @@ test1 = open('../data.nosync/test/1/data.csv', 'w+')
 
 for outcome in result:
     outcome = outcome.strip()  # Remove whitespace
+    case = data.readline()
 
     # Ignore outcomes that are not 1 or 2
     if (len(outcome) == 0 or int(outcome) > 1):
@@ -40,7 +41,7 @@ for outcome in result:
             print('unknown outcome:', outcome)
 
     # Now that we have the correct file, we just write it.
-    filename.write(data.readline())
+    filename.write(case)
 
     '''
     # Randomly add this case to either test or train.
