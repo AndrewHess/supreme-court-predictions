@@ -3,7 +3,7 @@ import csv
 import numpy as np
 import random
 
-def split_data():
+def split_data(dim=3):
     train_folder = 'data.nosync/train/'
     test_folder  = 'data.nosync/test/'
 
@@ -27,11 +27,14 @@ def split_data():
     test_x = np.array(test_x)
     test_y = np.array(test_y)
 
-    # Reshape the arrays and add 1 as the last dimension for x for Keras.
-    train_x = train_x.reshape((train_x.shape[0], train_x.shape[1], 1))
-    train_y = train_y.reshape((train_y.shape[0], 1))
-    test_x = test_x.reshape((test_x.shape[0], test_x.shape[1], 1))
-    test_y = test_y.reshape((test_y.shape[0], 1))
+    if dim == 3:
+        # Reshape the arrays and add 1 as the last dimension for x for Keras.
+        train_x = train_x.reshape((train_x.shape[0], train_x.shape[1], 1))
+        train_y = train_y.reshape((train_y.shape[0], 1))
+        test_x = test_x.reshape((test_x.shape[0], test_x.shape[1], 1))
+        test_y = test_y.reshape((test_y.shape[0], 1))
+    elif dim != 2:
+        print('Did not reshape to dim', dim)
 
     return (train_x, train_y, test_x, test_y)
 
